@@ -210,6 +210,7 @@ ngx_http_echo_exec_iad(ngx_http_request_t *r,
 
                 //没有找到
                 if(data_map_value->len <= 0) { //缓存信息中没有找到
+                //i_state = 2;
                     data_map_key = ngx_http_echo_iad_cache_key(r,&data_map_key_defalue,s_app_type);//默认key
 
                     //使用默认 999999
@@ -227,7 +228,8 @@ ngx_http_echo_exec_iad(ngx_http_request_t *r,
                 ngx_shmap_get(zone,data_map_key, data_map_value,&vt_str_cache,0,0);//从缓存查找信息
 
                 //没有找到
-                if(data_map_value->len <= 0) { //缓存信息中没有找到 
+                if(data_map_value->len <= 0) { //缓存信息中没有找到
+                    //i_state = 2;
                     data_map_key = ngx_http_echo_iad_cache_key(r,&data_map_key_defalue,s_app_type);//默认key
 
                     //使用默认 999999
