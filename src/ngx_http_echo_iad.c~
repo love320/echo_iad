@@ -228,19 +228,11 @@ ngx_http_echo_exec_iad(ngx_http_request_t *r,
             case 1:{
                 s_gateway = ngx_http_echo_iad_timestamp(r);//分配注册信息
 
-                data_map_key = ngx_http_echo_iad_cache_key(r,s_gateway,s_app_type);//获取分配注册key信息
+                data_map_key = ngx_http_echo_iad_cache_key(r,&data_map_key_defalue,s_app_type);//默认key
 
-                ngx_shmap_get(zone,data_map_key, data_map_value,&vt_str_cache,0,0);//从缓存查找信息
-
-                //没有找到
-                if(data_map_value->len <= 0) { //缓存信息中没有找到 
-                    data_map_key = ngx_http_echo_iad_cache_key(r,&data_map_key_defalue,s_app_type);//默认key
-
-                    //使用默认 999999
-                    ngx_shmap_get(zone,data_map_key, data_map_value,&vt_str_cache,0,0);
-                    if(data_map_value->len <= 0) i_state = 4;//默认信息未初始化
-                } 
-
+                //使用默认 999999
+                ngx_shmap_get(zone,data_map_key, data_map_value,&vt_str_cache,0,0);
+                if(data_map_value->len <= 0) i_state = 4;//默认信息未初始化
                 break;
             }
 
