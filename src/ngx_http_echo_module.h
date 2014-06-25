@@ -134,5 +134,13 @@ typedef struct {
 
 } ngx_http_echo_ctx_t;
 
+/*获取所有缓存信息，专用的结构体
+ * */
+typedef struct {
+    ngx_http_request_t *r; 
+    ngx_str_t  *all_key;
+} ngx_http_iad_all_key_json_data_t;
+
+
 
 #endif /* NGX_HTTP_ECHO_MODULE_H */
